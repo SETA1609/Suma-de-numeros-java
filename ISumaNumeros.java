@@ -26,4 +26,10 @@ public interface ISumaNumeros {
      * This function should change the RUNNING value
      */
     void salir();
+    
+    /**
+     * Check if the program is still running
+     * @return true if running, false otherwise
+     */
+    boolean isRunning();
 }
