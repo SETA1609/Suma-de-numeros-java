@@ -19,22 +19,17 @@ public class SumasImplementacion implements OperacionesSumas {
         System.out.print("Ingrese el valor de B: ");
         int b = sc.nextInt();
 
-        // Aseguramos a <= b
-        if (a > b) {
-            int temp = a;
-            a = b;
-            b = temp;
-            System.out.println("Nota: A era mayor que B → se intercambiaron automáticamente.");
-        }
+        int inicio = Math.min(a, b);
+        int fin = Math.max(a, b);
 
-        int sumaHastaB = b * (b + 1) / 2;
-        int sumaHastaAMenos1 = (a - 1) * a / 2;
-        int suma = sumaHastaB - sumaHastaAMenos1;
+        int sumaHastaFin = fin * (fin + 1) / 2;
+        int sumaHastaInicioMenos1 = (inicio - 1) * inicio / 2;
+        int suma = sumaHastaFin - sumaHastaInicioMenos1;
 
-        int cantidad = b - a + 1;
+        int cantidad = fin - inicio + 1;
         double promedio = (double) suma / cantidad;
 
-        System.out.println("Suma de los números entre " + a + " y " + b + ": " + suma);
+        System.out.println("Suma de los números entre " + inicio + " y " + fin + ": " + suma);
         System.out.println("Promedio: " + promedio + "\n");
     }
 

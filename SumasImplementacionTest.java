@@ -76,13 +76,13 @@ public class SumasImplementacionTest {
     }
 
     @Test
-    @DisplayName("Función 2: Valores invertidos (B > A) se intercambian automáticamente")
+    @DisplayName("Función 2: Valores invertidos (B > A) se manejan correctamente con Math.min/max")
     public void testEjecutarSumaYPromedioEntreAyB_invertidos() {
         Scanner sc = new Scanner("10\n1\n");
         operaciones.ejecutarSumaYPromedioEntreAyb(sc);
         String output = getOutput();
         assertTrue(output.contains("55"), "La salida debe contener la suma 55");
-        assertTrue(output.contains("intercambiaron"), "Debe indicar que se intercambiaron los valores");
+        assertTrue(output.contains("5.5"), "La salida debe contener el promedio 5.5");
     }
 
     @Test
