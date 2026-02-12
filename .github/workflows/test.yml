@@ -1,0 +1,40 @@
+name: Java Unit Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Download JUnit Platform Console Standalone
+        run: |
+          curl -L -o junit-platform-console-standalone.jar \
+            https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
+
+      - name: Compile source and test files
+        run: |
+          javac -cp junit-platform-console-standalone.jar *.java
+
+      - name: Run unit tests
+        run: |
+          java -jar junit-platform-console-standalone.jar \
+            --class-path . \
+            --scan-class-path \
+            --fail-if-no-tests

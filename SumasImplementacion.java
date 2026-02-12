@@ -5,8 +5,7 @@ public class SumasImplementacion implements OperacionesSumas {
     @Override
     public void ejecutarSuma1al25() {
         System.out.println("=== Función 1: Suma de los números del 1 al 25 ===");
-        int n = 25;
-        int suma = n * (n + 1) / 2;
+        int suma = calcularSuma1al25();
         System.out.println("Aplicando la fórmula de Gauss: suma = n(n+1)/2");
         System.out.println("Resultado: " + suma + "\n");
     }
@@ -27,12 +26,8 @@ public class SumasImplementacion implements OperacionesSumas {
             System.out.println("Nota: A era mayor que B → se intercambiaron automáticamente.");
         }
 
-        int sumaHastaB = b * (b + 1) / 2;
-        int sumaHastaAMenos1 = (a - 1) * a / 2;
-        int suma = sumaHastaB - sumaHastaAMenos1;
-
-        int cantidad = b - a + 1;
-        double promedio = (double) suma / cantidad;
+        int suma = calcularSumaEntreAyB(a, b);
+        double promedio = calcularPromedioEntreAyB(a, b);
 
         System.out.println("Suma de los números entre " + a + " y " + b + ": " + suma);
         System.out.println("Promedio: " + promedio + "\n");
@@ -69,5 +64,41 @@ public class SumasImplementacion implements OperacionesSumas {
             System.out.println("Entendido. Finalizando el programa.\n");
             return false;
         }
+    }
+
+    @Override
+    public int calcularSuma1al25() {
+        int n = 25;
+        return n * (n + 1) / 2;
+    }
+
+    @Override
+    public int calcularSumaEntreAyB(int a, int b) {
+        if (a > b) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        int sumaHastaB = b * (b + 1) / 2;
+        int sumaHastaAMenos1 = (a - 1) * a / 2;
+        return sumaHastaB - sumaHastaAMenos1;
+    }
+
+    @Override
+    public double calcularPromedioEntreAyB(int a, int b) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+        int suma = calcularSumaEntreAyB(min, max);
+        int cantidad = max - min + 1;
+        return (double) suma / cantidad;
+    }
+
+    @Override
+    public double calcularSumaDeNumeros(double[] numeros) {
+        double suma = 0.0;
+        for (double numero : numeros) {
+            suma += numero;
+        }
+        return suma;
     }
 }
